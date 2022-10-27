@@ -39,3 +39,12 @@ func (inst *serverImpl) FindHandler(name string) (*HandlerRegistration, error) {
 	*hr2 = *hr
 	return hr2, nil
 }
+
+func (inst *serverImpl) ListNames() []string {
+	src := inst.handlers
+	dst := make([]string, 0)
+	for name := range src {
+		dst = append(dst, name)
+	}
+	return dst
+}

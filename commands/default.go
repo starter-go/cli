@@ -3,6 +3,7 @@ package commands
 import (
 	"bitwormhole.com/starter/cli"
 	"bitwormhole.com/starter/cli/filters"
+	"bitwormhole.com/starter/cli/handlers"
 )
 
 // DefaultContextBuilder ....
@@ -19,7 +20,12 @@ func DefaultContextBuilder() *cli.ContextBuilder {
 	builder.RegisterFilter(&filters.HandlingFilter{})
 	builder.RegisterFilter(&filters.MultilineCommandFilter{})
 
-	builder.RegisterHandler(nil)
+	builder.RegisterHandler(&handlers.ChdirHandler{})
+	builder.RegisterHandler(&handlers.HelpHandler{})
+	builder.RegisterHandler(&handlers.LsHandler{})
+	builder.RegisterHandler(&handlers.MkdirHandler{})
+	builder.RegisterHandler(&handlers.PwdHandler{})
+	builder.RegisterHandler(&handlers.SleepHandler{})
 
 	return builder
 }

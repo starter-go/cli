@@ -2,7 +2,6 @@ package cli
 
 import (
 	"context"
-	"io"
 	"os"
 )
 
@@ -10,9 +9,7 @@ import (
 type Binding struct {
 	WD      string
 	Env     map[string]string
-	Error   io.Writer
-	Output  io.Writer
-	Input   io.Reader
+	Console Console
 	Context context.Context
 }
 
@@ -36,14 +33,18 @@ func GetBinding(c context.Context) *Binding {
 		wd = "/home/x"
 	}
 
+	// new console
+	cb := &ConsoleBuilder{}
+	cb.Error = os.Stderr
+	cb.Output = os.Stdout
+	cb.Input = os.Stdin
+
 	// make new Binding
 	b = &Binding{}
 	c2 := context.WithValue(c, key, b)
 	b.Context = c2
-	b.Error = os.Stderr
-	b.Output = os.Stdout
-	b.Input = os.Stdin
 	b.WD = wd
+	b.Console = cb.Create()
 
 	return b
 }
