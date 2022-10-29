@@ -6,14 +6,14 @@ import (
 	"time"
 
 	"bitwormhole.com/starter/cli"
-	"bitwormhole.com/starter/cli/commands"
+	"bitwormhole.com/starter/cli/config"
 )
 
 func testCommand(t *testing.T, cmd string) {
 
 	tmp := t.TempDir()
 
-	cfg := commands.DefaultConfig(nil)
+	cfg := config.GetDefaultConfiguration()
 	cmdline := cli.New(cfg)
 	client := cmdline.GetClient()
 	cc := cli.Bind(nil)
