@@ -11,7 +11,9 @@ type Binding interface {
 	GetWD() string
 	GetEnv() map[string]string
 	GetConsole() Console
+	GetCLI() CLI
 
+	SetCLI(c CLI)
 	SetWD(wd string)
 	SetEnv(kv map[string]string)
 	SetConsole(c Console)
@@ -28,9 +30,7 @@ type binding struct {
 	wd      string
 	env     map[string]string
 	console Console
-
-	// config  *Configuration
-	// context *Context
+	cli     CLI
 
 	facade Binding
 }
@@ -116,6 +116,10 @@ func (inst *bindingFacade) GetConsole() Console {
 	return inst.inner.console
 }
 
+func (inst *bindingFacade) GetCLI() CLI {
+	return inst.inner.cli
+}
+
 func (inst *bindingFacade) SetWD(wd string) {
 	inst.inner.wd = wd
 }
@@ -128,6 +132,10 @@ func (inst *bindingFacade) SetConsole(c Console) {
 	inst.inner.console = c
 }
 
+func (inst *bindingFacade) SetCLI(c CLI) {
+	inst.inner.cli = c
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // GetBinding ... get the facade of binding
@@ -138,4 +146,19 @@ func GetBinding(cc context.Context) Binding {
 		panic(err)
 	}
 	return b.facade
+}
+
+// Bind ...
+func Bind(cc context.Context) context.Context {
+	ba := bindingAccess{}
+	b, err := ba.getBinding(cc)
+	if err == nil && b != nil {
+		return cc
+	}
+	cc = ba.setup(cc)
+	b, err = ba.getBinding(cc)
+	if err != nil {
+		panic(err)
+	}
+	return cc
 }

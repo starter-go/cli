@@ -4,8 +4,15 @@ import "context"
 
 // CLI ...
 type CLI interface {
+
+	// 取客户端
 	GetClient() Client
+
+	// 取服务端
 	GetServer() Server
+
+	// 把这个 CLI 绑定到指定的 Context
+	Bind(cc context.Context) context.Context
 }
 
 // New 初始化 cli 模块
@@ -16,21 +23,6 @@ func New(cfg *Configuration) CLI {
 		panic(err)
 	}
 	return ctx.CLI
-}
-
-// Bind ...
-func Bind(cc context.Context) context.Context {
-	ba := bindingAccess{}
-	b, err := ba.getBinding(cc)
-	if err == nil && b != nil {
-		return cc
-	}
-	cc = ba.setup(cc)
-	b, err = ba.getBinding(cc)
-	if err != nil {
-		panic(err)
-	}
-	return cc
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,7 @@
 package cli
 
+import "context"
+
 type implCLI struct {
 	context *Context
 }
@@ -14,4 +16,11 @@ func (inst *implCLI) GetClient() Client {
 
 func (inst *implCLI) GetServer() Server {
 	return inst.context.Server
+}
+
+func (inst *implCLI) Bind(cc context.Context) context.Context {
+	cc = Bind(cc)
+	b := GetBinding(cc)
+	b.SetCLI(inst)
+	return cc
 }
