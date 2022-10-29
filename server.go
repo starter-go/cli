@@ -6,3 +6,8 @@ type Server interface {
 
 	ListNames() []string
 }
+
+// ServerFactory ...
+type ServerFactory interface {
+	NewServer(c *Context) (Server, error)
+}

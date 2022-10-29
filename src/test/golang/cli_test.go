@@ -12,14 +12,17 @@ import (
 func testCommand(t *testing.T, cmd string) {
 
 	tmp := t.TempDir()
+
+	cfg := commands.DefaultConfig(nil)
+	cc := cli.Init(nil, cfg)
+	client := cli.GetClient(cc)
+
 	task := &cli.Task{
+		Context: cc,
 		Command: cmd,
 		WD:      tmp,
 	}
-
-	cb := commands.DefaultContextBuilder()
-	ctx := cb.Create()
-	err := ctx.Client.Run(task)
+	err := client.Run(task)
 	if err != nil {
 		t.Error(err)
 	}

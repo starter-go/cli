@@ -33,10 +33,9 @@ func (inst *BindingFilter) Pass(task *cli.Task, chain cli.FilterChain) error {
 	ctx := task.Context
 	if ctx == nil {
 		ctx = context.Background()
+		task.Context = ctx
 	}
 	b := cli.GetBinding(ctx)
-	ctx = b.Context
-	task.Context = ctx
 
 	// pre-process
 	err := inst.preprocess(task, b)
@@ -54,11 +53,11 @@ func (inst *BindingFilter) Pass(task *cli.Task, chain cli.FilterChain) error {
 	return chain.Pass(task)
 }
 
-func (inst *BindingFilter) prepareConsole(task *cli.Task, b *cli.Binding) (cli.Console, error) {
+func (inst *BindingFilter) prepareConsole(task *cli.Task, b cli.Binding) (cli.Console, error) {
 
 	con := task.Console
 	if con == nil {
-		con = b.Console
+		con = b.GetConsole()
 	}
 	if con != nil {
 		return con, nil
@@ -73,9 +72,9 @@ func (inst *BindingFilter) prepareConsole(task *cli.Task, b *cli.Binding) (cli.C
 	return con, nil
 }
 
-func (inst *BindingFilter) prepareEnv(task *cli.Task, b *cli.Binding) (map[string]string, error) {
+func (inst *BindingFilter) prepareEnv(task *cli.Task, b cli.Binding) (map[string]string, error) {
 	src := task.Env
-	dst := b.Env
+	dst := b.GetEnv()
 	if dst == nil {
 		dst = make(map[string]string)
 	}
@@ -85,10 +84,10 @@ func (inst *BindingFilter) prepareEnv(task *cli.Task, b *cli.Binding) (map[strin
 	return dst, nil
 }
 
-func (inst *BindingFilter) prepareWD(task *cli.Task, b *cli.Binding) (string, error) {
+func (inst *BindingFilter) prepareWD(task *cli.Task, b cli.Binding) (string, error) {
 	wd := task.WD
 	if wd == "" {
-		wd = b.WD
+		wd = b.GetWD()
 	}
 	if wd != "" {
 		return wd, nil
@@ -96,7 +95,7 @@ func (inst *BindingFilter) prepareWD(task *cli.Task, b *cli.Binding) (string, er
 	return os.Getwd()
 }
 
-func (inst *BindingFilter) preprocess(task *cli.Task, b *cli.Binding) error {
+func (inst *BindingFilter) preprocess(task *cli.Task, b cli.Binding) error {
 
 	// wd
 	wd, err := inst.prepareWD(task, b)
@@ -104,7 +103,7 @@ func (inst *BindingFilter) preprocess(task *cli.Task, b *cli.Binding) error {
 		return err
 	}
 	task.WD = wd
-	b.WD = wd
+	b.SetWD(wd)
 
 	// console
 	console, err := inst.prepareConsole(task, b)
@@ -112,7 +111,7 @@ func (inst *BindingFilter) preprocess(task *cli.Task, b *cli.Binding) error {
 		return err
 	}
 	task.Console = console
-	b.Console = console
+	b.SetConsole(console)
 
 	// env
 	env, err := inst.prepareEnv(task, b)
@@ -120,12 +119,12 @@ func (inst *BindingFilter) preprocess(task *cli.Task, b *cli.Binding) error {
 		return err
 	}
 	task.Env = env
-	b.Env = env
+	b.SetEnv(env)
 
 	return nil
 }
 
-func (inst *BindingFilter) postProcess(task *cli.Task, b *cli.Binding) error {
+func (inst *BindingFilter) postProcess(task *cli.Task, b cli.Binding) error {
 
 	console := task.Console
 	if console != nil {
@@ -133,8 +132,8 @@ func (inst *BindingFilter) postProcess(task *cli.Task, b *cli.Binding) error {
 		console.Out().Flush()
 	}
 
-	b.Env = task.Env
-	b.WD = task.WD
-	b.Console = console
+	b.SetEnv(task.Env)
+	b.SetWD(task.WD)
+	b.SetConsole(console)
 	return nil
 }

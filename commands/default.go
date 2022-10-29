@@ -6,15 +6,29 @@ import (
 	"bitwormhole.com/starter/cli/handlers"
 )
 
-// DefaultContextBuilder ....
-func DefaultContextBuilder() *cli.ContextBuilder {
+// DefaultConfig ....
+func DefaultConfig(cfg *cli.Configuration) *cli.Configuration {
 
-	ctx := &cli.Context{}
-	builder := &cli.ContextBuilder{}
-	builder.Init(ctx)
+	if cfg == nil {
+		cfg = &cli.Configuration{}
+	}
+
+	if cfg.ClientFactory == nil {
+		cfg.ClientFactory = &cli.DefaultClientFactory{}
+	}
+
+	if cfg.ServerFactory == nil {
+		cfg.ServerFactory = &cli.DefaultServerFactory{}
+	}
+
+	if cfg.ContextFactory == nil {
+		cfg.ContextFactory = &cli.DefaultContextFactory{}
+	}
+
+	builder := configBuilder{config: cfg}
 
 	builder.RegisterFilter(&filters.BindingFilter{})
-	builder.RegisterFilter(&filters.ClientServerInjectingFilter{Context: ctx})
+	builder.RegisterFilter(&filters.ClientServerInjectingFilter{})
 	builder.RegisterFilter(&filters.CommandPrepareFilter{})
 	builder.RegisterFilter(&filters.ErrorFilter{})
 	builder.RegisterFilter(&filters.HandlingFilter{})
@@ -27,5 +41,21 @@ func DefaultContextBuilder() *cli.ContextBuilder {
 	builder.RegisterHandler(&handlers.PwdHandler{})
 	builder.RegisterHandler(&handlers.SleepHandler{})
 
-	return builder
+	return cfg
+}
+
+type configBuilder struct {
+	config *cli.Configuration
+}
+
+func (inst *configBuilder) RegisterFilter(x cli.FilterRegistry) {
+	list := inst.config.Filters
+	list = append(list, x)
+	inst.config.Filters = list
+}
+
+func (inst *configBuilder) RegisterHandler(x cli.HandlerRegistry) {
+	list := inst.config.Handlers
+	list = append(list, x)
+	inst.config.Handlers = list
 }

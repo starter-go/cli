@@ -2,8 +2,11 @@ package cli
 
 import "context"
 
+////////////////////////////////////////////////////////////////////////////////
+
 type clientImpl struct {
-	chain FilterChain
+	// chain FilterChain
+	context *Context
 }
 
 func (inst *clientImpl) _Impl() Client {
@@ -19,5 +22,26 @@ func (inst *clientImpl) RunCCA(ctx context.Context, cmd string, args []string) e
 }
 
 func (inst *clientImpl) Run(t *Task) error {
-	return inst.chain.Pass(t)
+	chain := inst.context.Chain
+	return chain.Pass(t)
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+// DefaultClientFactory ...
+type DefaultClientFactory struct {
+}
+
+func (inst *DefaultClientFactory) _Impl() ClientFactory {
+	return inst
+}
+
+// NewClient ...
+func (inst *DefaultClientFactory) NewClient(c *Context) (Client, error) {
+	client := &clientImpl{
+		context: c,
+	}
+	return client, nil
+}
+
+////////////////////////////////////////////////////////////////////////////////

@@ -9,3 +9,8 @@ type Client interface {
 	// run a task with Context & Command & Arguments
 	RunCCA(ctx context.Context, cmd string, args []string) error
 }
+
+// ClientFactory ...
+type ClientFactory interface {
+	NewClient(c *Context) (Client, error)
+}

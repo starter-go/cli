@@ -3,10 +3,15 @@ package cli
 import (
 	"errors"
 	"strings"
+
+	"bitwormhole.com/starter/vlog"
 )
 
+////////////////////////////////////////////////////////////////////////////////
+
 type serverImpl struct {
-	handlers map[string]*HandlerRegistration
+	context  *Context
+	handlers map[string]*HandlerRegistration // cache
 }
 
 func (inst *serverImpl) _Impl() Server {
@@ -17,11 +22,32 @@ func (inst *serverImpl) makeNoHandlerError(name string) (*HandlerRegistration, e
 	return nil, errors.New("no handler for command:" + name)
 }
 
+func (inst *serverImpl) getTab() map[string]*HandlerRegistration {
+	t := inst.handlers
+	if t == nil {
+		t = make(map[string]*HandlerRegistration)
+	} else {
+		return t
+	}
+	src := inst.context.Handlers
+	for _, hr := range src {
+		name := hr.Name
+		old := t[name]
+		if old == nil {
+			t[name] = hr
+		} else {
+			vlog.Warn("the command name is duplicated, name=" + name)
+		}
+	}
+	inst.handlers = t
+	return t
+}
+
 func (inst *serverImpl) FindHandler(name string) (*HandlerRegistration, error) {
 
 	name = strings.TrimSpace(name)
 
-	table := inst.handlers
+	table := inst.getTab()
 	if table == nil {
 		return inst.makeNoHandlerError(name)
 	}
@@ -48,3 +74,23 @@ func (inst *serverImpl) ListNames() []string {
 	}
 	return dst
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+// DefaultServerFactory ...
+type DefaultServerFactory struct {
+}
+
+func (inst *DefaultServerFactory) _Impl() ServerFactory {
+	return inst
+}
+
+// NewServer ...
+func (inst *DefaultServerFactory) NewServer(c *Context) (Server, error) {
+	server := &serverImpl{
+		context: c,
+	}
+	return server, nil
+}
+
+////////////////////////////////////////////////////////////////////////////////

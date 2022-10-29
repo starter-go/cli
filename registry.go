@@ -2,6 +2,9 @@ package cli
 
 import "sort"
 
+// OnInitFunc 定义组件的初始化函数
+type OnInitFunc func(c *Context) error
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // HandlerRegistration ... 定义一条命令的注册信息
@@ -9,6 +12,7 @@ type HandlerRegistration struct {
 	Name    string
 	Handler HandlerFunc
 	Help    Help
+	OnInit  OnInitFunc
 }
 
 // HandlerRegistry ... 该接口表示一个命令注册对象
@@ -23,6 +27,7 @@ type FilterRegistration struct {
 	Name   string
 	Filter Filter
 	Order  int
+	OnInit OnInitFunc
 }
 
 // FilterRegistry ... 该接口表示一个命令注册对象

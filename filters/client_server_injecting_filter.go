@@ -13,12 +13,18 @@ func (inst *ClientServerInjectingFilter) _Impl() (cli.FilterRegistry, cli.Filter
 	return inst, inst
 }
 
+func (inst *ClientServerInjectingFilter) init(c *cli.Context) error {
+	inst.Context = c
+	return nil
+}
+
 // GetFilters ...
 func (inst *ClientServerInjectingFilter) GetFilters() []*cli.FilterRegistration {
 	fr := &cli.FilterRegistration{
 		Name:   "ClientServerInjectingFilter",
 		Order:  OrderClientServer,
 		Filter: inst,
+		OnInit: inst.init,
 	}
 	return []*cli.FilterRegistration{fr}
 }
