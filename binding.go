@@ -28,9 +28,11 @@ type binding struct {
 	wd      string
 	env     map[string]string
 	console Console
-	config  *Configuration
-	context *Context
-	facade  Binding
+
+	// config  *Configuration
+	// context *Context
+
+	facade Binding
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,6 +63,9 @@ func (inst *bindingAccess) setup(c context.Context) context.Context {
 // getBinding ...
 func (bindingAccess) getBinding(c context.Context) (*binding, error) {
 	const key = theBindingKey
+	if c == nil {
+		c = context.Background()
+	}
 	o := c.Value(key)
 	b, ok := o.(*binding)
 	if ok && b != nil {

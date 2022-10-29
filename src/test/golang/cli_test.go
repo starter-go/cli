@@ -14,8 +14,9 @@ func testCommand(t *testing.T, cmd string) {
 	tmp := t.TempDir()
 
 	cfg := commands.DefaultConfig(nil)
-	cc := cli.Init(nil, cfg)
-	client := cli.GetClient(cc)
+	cmdline := cli.New(cfg)
+	client := cmdline.GetClient()
+	cc := cli.Bind(nil)
 
 	task := &cli.Task{
 		Context: cc,

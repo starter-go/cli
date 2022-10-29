@@ -4,6 +4,10 @@ package cli
 type Server interface {
 	FindHandler(name string) (*HandlerRegistration, error)
 
+	RegisterHandler(hr *HandlerRegistration) error
+
+	RegisterHandlers(hr HandlerRegistry) error
+
 	ListNames() []string
 }
 

@@ -1,10 +1,6 @@
 package cli
 
-import (
-	"context"
-
-	"bitwormhole.com/starter/vlog"
-)
+import "context"
 
 // CLI ...
 type CLI interface {
@@ -12,55 +8,53 @@ type CLI interface {
 	GetServer() Server
 }
 
-// Init 初始化 cli 模块
-func Init(c context.Context, config *Configuration) context.Context {
-
-	if c == nil {
-		c = context.Background()
-	}
-
-	if config == nil {
-		config = makeDefaultConfig()
-	}
-
-	ba := bindingAccess{}
-	c = ba.setup(c)
-	b, err := ba.getBinding(c)
+// New 初始化 cli 模块
+func New(cfg *Configuration) CLI {
+	cfg = prepareConfig(cfg)
+	ctx, err := cfg.ContextFactory.NewContext(cfg)
 	if err != nil {
 		panic(err)
 	}
-
-	ctx := b.context
-	if ctx == nil {
-		b.config = config
-		ctx, err = config.ContextFactory.NewContext(config)
-		if err != nil {
-			panic(err)
-		}
-		b.context = ctx
-	}
-
-	return c
+	return ctx.CLI
 }
 
-// GetClient ...
-func GetClient(c context.Context) Client {
+// Bind ...
+func Bind(cc context.Context) context.Context {
 	ba := bindingAccess{}
-	b, err := ba.getBinding(c)
-	if err != nil {
-		vlog.Error(err)
-		panic("need for cli.Init()")
+	b, err := ba.getBinding(cc)
+	if err == nil && b != nil {
+		return cc
 	}
-	ctx := b.context
-	return ctx.Client
+	cc = ba.setup(cc)
+	b, err = ba.getBinding(cc)
+	if err != nil {
+		panic(err)
+	}
+	return cc
 }
 
-func makeDefaultConfig() *Configuration {
-	c := &Configuration{}
-	c.ContextFactory = &DefaultContextFactory{}
-	c.ClientFactory = &DefaultClientFactory{}
-	c.ServerFactory = &DefaultServerFactory{}
-	c.Handlers = nil
-	c.Filters = nil
+////////////////////////////////////////////////////////////////////////////////
+
+func prepareConfig(c *Configuration) *Configuration {
+
+	if c == nil {
+		c = &Configuration{}
+	}
+
+	if c.ContextFactory == nil {
+		c.ContextFactory = &DefaultContextFactory{}
+	}
+
+	if c.ClientFactory == nil {
+		c.ClientFactory = &DefaultClientFactory{}
+	}
+
+	if c.ServerFactory == nil {
+		c.ServerFactory = &DefaultServerFactory{}
+	}
+
+	// c.Handlers = nil
+	// c.Filters = nil
+
 	return c
 }

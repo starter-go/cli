@@ -75,6 +75,31 @@ func (inst *serverImpl) ListNames() []string {
 	return dst
 }
 
+func (inst *serverImpl) RegisterHandler(hr *HandlerRegistration) error {
+	if hr == nil {
+		return nil
+	}
+	name := hr.Name
+	dst := inst.getTab()
+	old := dst[name]
+	if old != nil {
+		return errors.New("the command name is duplicated, name=" + name)
+	}
+	dst[name] = hr
+	return nil
+}
+
+func (inst *serverImpl) RegisterHandlers(hr HandlerRegistry) error {
+	src := hr.GetHandlers()
+	for _, hr2 := range src {
+		err := inst.RegisterHandler(hr2)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // DefaultServerFactory ...
