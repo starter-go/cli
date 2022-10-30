@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"bitwormhole.com/starter/cli"
+	"bitwormhole.com/starter/cli/arguments"
 )
 
 // CommandPrepareFilter ...
@@ -27,7 +28,7 @@ func (inst *CommandPrepareFilter) GetFilters() []*cli.FilterRegistration {
 // Pass ...
 func (inst *CommandPrepareFilter) Pass(task *cli.Task, chain cli.FilterChain) error {
 
-	a1 := cli.LineToArguments(task.Command)
+	a1 := arguments.Parse(task.Command)
 	a2 := task.Arguments
 
 	// 混合在一起

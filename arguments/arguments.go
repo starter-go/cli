@@ -1,9 +1,9 @@
-package cli
+package arguments
 
 import "strings"
 
-// ArgumentsToLine 根据参数数组组合成一行命令
-func ArgumentsToLine(args []string) string {
+// Assemble 根据参数数组组合成一行命令
+func Assemble(args []string) string {
 	builder := commandLineBuilder{}
 	for _, part := range args {
 		builder.append(part)
@@ -11,8 +11,8 @@ func ArgumentsToLine(args []string) string {
 	return builder.make()
 }
 
-// LineToArguments 把一行命令转换为参数数组
-func LineToArguments(line string) []string {
+// Parse 把一行命令转换为参数数组
+func Parse(line string) []string {
 	reader := argumentReader{}
 	reader.init(line)
 	list := make([]string, 0)
@@ -30,9 +30,9 @@ func LineToArguments(line string) []string {
 	return list
 }
 
-// UnwrapAllArguments 把所有的参数解封装
-func UnwrapAllArguments(args []string) []string {
-	aa := arguments{}
+// UnwrapAll 把所有的参数解封装
+func UnwrapAll(args []string) []string {
+	aa := argumentTools{}
 	src := args
 	dst := make([]string, 0)
 	for _, item := range src {
@@ -175,7 +175,7 @@ func (inst *commandLineBuilder) make() string {
 func (inst *commandLineBuilder) append(part string) {
 
 	const sep = " "
-	aa := arguments{}
+	aa := argumentTools{}
 
 	part = strings.TrimSpace(part)
 	if part == "" {
@@ -195,10 +195,10 @@ func (inst *commandLineBuilder) append(part string) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-type arguments struct {
+type argumentTools struct {
 }
 
-func (inst *arguments) wrapString(str string) string {
+func (inst *argumentTools) wrapString(str string) string {
 	const mark1 = '\''
 	const mark2 = '"'
 	hasMark1 := strings.ContainsRune(str, mark1)
@@ -215,7 +215,7 @@ func (inst *arguments) wrapString(str string) string {
 	return mkstr + str + mkstr
 }
 
-func (inst *arguments) unwrapString(str string) string {
+func (inst *argumentTools) unwrapString(str string) string {
 
 	str = strings.TrimSpace(str)
 	length := len(str)
@@ -236,7 +236,7 @@ func (inst *arguments) unwrapString(str string) string {
 	return str
 }
 
-func (inst *arguments) isStringWrapped(str string) bool {
+func (inst *argumentTools) isStringWrapped(str string) bool {
 
 	str = strings.TrimSpace(str)
 
@@ -253,7 +253,7 @@ func (inst *arguments) isStringWrapped(str string) bool {
 	return false
 }
 
-func (inst *arguments) isNeedForWrapping(str string) bool {
+func (inst *argumentTools) isNeedForWrapping(str string) bool {
 	str = strings.TrimSpace(str)
 	chs := []rune{'\t', ' ', '\r', '\n', '=', '\'', '"'}
 	return strings.ContainsAny(str, string(chs))
