@@ -2,7 +2,7 @@ package cli
 
 import "context"
 
-// CLI ...
+// CLI ... [inject:"#cli"]
 type CLI interface {
 
 	// 取客户端

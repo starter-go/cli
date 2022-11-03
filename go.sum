@@ -4,3 +4,5 @@ bitwormhole.com/starter/base v0.0.0-20220718031435-6de2532eedf1 h1:iqjIy0b9aZlyH
 bitwormhole.com/starter/base v0.0.0-20220718031435-6de2532eedf1/go.mod h1:a8v7ioNoU380zyISNEXTaVInVFu00FvXo3UHJAckPG0=
 bitwormhole.com/starter/vlog v0.0.0-20220717141231-71498d1f5184 h1:HkOmqSZbE+I0kE336mxZdPYw85OwQs9lLDHwNB8AWe0=
 bitwormhole.com/starter/vlog v0.0.0-20220717141231-71498d1f5184/go.mod h1:bb4xDVyOD0+tAhaiscUmuzsFJ+/EL+qE79Je8U0ZqTQ=
+github.com/bitwormhole/starter v0.1.5 h1:WKYzskMDu1kStoREvCviYIk2eOWYXpy2QYuYaX1Db80=
+github.com/bitwormhole/starter v0.1.5/go.mod h1:3/UtKB8VwcmR5xf8mx4V7vgGLaej89LaoT+KuJKWL60=

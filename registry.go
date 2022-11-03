@@ -16,6 +16,7 @@ type HandlerRegistration struct {
 }
 
 // HandlerRegistry ... 该接口表示一个命令注册对象
+// [inject:".cli-handler-registry"]
 type HandlerRegistry interface {
 	GetHandlers() []*HandlerRegistration
 }
@@ -31,6 +32,7 @@ type FilterRegistration struct {
 }
 
 // FilterRegistry ... 该接口表示一个命令注册对象
+// [inject:".cli-filter-registry"]
 type FilterRegistry interface {
 	GetFilters() []*FilterRegistration
 }
