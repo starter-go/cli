@@ -4,6 +4,7 @@ import (
 	"errors"
 	"strings"
 
+	"bitwormhole.com/starter/afs"
 	"bitwormhole.com/starter/afs/files"
 	"bitwormhole.com/starter/cli"
 )
@@ -47,6 +48,8 @@ func (inst *ChdirHandler) Run(task *cli.Task) error {
 	dst := strings.TrimSpace(to)
 	if strings.HasPrefix(dst, "/") {
 		next = current.GetFS().NewPath(to)
+	} else if strings.HasPrefix(dst, "file:/") {
+		next = inst.getTargetWithFileURL(current, dst)
 	} else {
 		next = current.GetChild(to)
 	}
@@ -59,4 +62,28 @@ func (inst *ChdirHandler) Run(task *cli.Task) error {
 
 	task.WD = path
 	return nil
+}
+
+// getTargetWithFileURL 解析 "file:/" 形式的路径
+func (inst *ChdirHandler) getTargetWithFileURL(current afs.Path, to string) afs.Path {
+	const prefix = "file:/"
+	to = to[len(prefix):]
+	fs1 := current.GetFS()
+	sep1 := fs1.Separator()
+	sep := ""
+	builder := strings.Builder{}
+	elements := strings.Split(to, "/")
+	for _, part := range elements {
+		if part == "" {
+			continue
+		}
+		builder.WriteString(sep)
+		builder.WriteString(part)
+		sep = sep1
+	}
+	path := builder.String()
+	if sep1 == "/" {
+		path = "/" + path
+	}
+	return fs1.NewPath(path)
 }
