@@ -35,7 +35,12 @@ func (inst *ErrorFilter) GetFilters() []*cli.FilterRegistration {
 func (inst *ErrorFilter) Pass(task *cli.Task, chain cli.FilterChain) error {
 	h := errorFilterHolder{}
 	inst.do(task, chain, &h)
-	return h.err
+	err := h.err
+	if err != nil && task.Quietly {
+		task.Console.Err().WriteString(err.Error())
+		err = nil
+	}
+	return err
 }
 
 func (inst *ErrorFilter) do(task *cli.Task, chain cli.FilterChain, h *errorFilterHolder) {

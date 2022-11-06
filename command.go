@@ -12,4 +12,5 @@ type Task struct {
 	Console   Console
 	WD        string
 	Env       map[string]string
+	Quietly   bool // 把异常输出到 Console.Error, 而不是抛出
 }
