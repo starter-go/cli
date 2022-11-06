@@ -23,6 +23,7 @@ func (inst *Handlers) GetHandlers() []*cli.HandlerRegistration {
 	all = inst.fill(all, &handlers.HelpHandler{})
 	all = inst.fill(all, &handlers.LsHandler{})
 	all = inst.fill(all, &handlers.MkdirHandler{})
+	all = inst.fill(all, &handlers.NowHandler{})
 	all = inst.fill(all, &handlers.PwdHandler{})
 	all = inst.fill(all, &handlers.SleepHandler{})
 

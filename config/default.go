@@ -47,6 +47,7 @@ func (inst *defaultConfigurationLoader) regHandlers(cfg *cli.Configuration) {
 	inst.registerHandler(cfg, &handlers.HelpHandler{})
 	inst.registerHandler(cfg, &handlers.LsHandler{})
 	inst.registerHandler(cfg, &handlers.MkdirHandler{})
+	inst.registerHandler(cfg, &handlers.NowHandler{})
 	inst.registerHandler(cfg, &handlers.PwdHandler{})
 	inst.registerHandler(cfg, &handlers.SleepHandler{})
 }

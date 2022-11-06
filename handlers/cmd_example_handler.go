@@ -10,10 +10,15 @@ func (inst *ExampleHandler) _Impl() (cli.Handler, cli.HandlerRegistry, cli.Help)
 	return inst, inst, inst
 }
 
+func (inst *ExampleHandler) name() string {
+	return "example"
+}
+
 // GetHandlers ...
 func (inst *ExampleHandler) GetHandlers() []*cli.HandlerRegistration {
+	name := inst.name()
 	hr := &cli.HandlerRegistration{
-		Name:    "example",
+		Name:    name,
 		Handler: inst.Run,
 		Help:    inst,
 	}
@@ -22,8 +27,9 @@ func (inst *ExampleHandler) GetHandlers() []*cli.HandlerRegistration {
 
 // GetHelp ...
 func (inst *ExampleHandler) GetHelp() *cli.HelpInfo {
+	name := inst.name()
 	info := &cli.HelpInfo{
-		Name:    "example",
+		Name:    name,
 		Title:   "Example",
 		Usage:   "todo...",
 		Content: "todo...",
