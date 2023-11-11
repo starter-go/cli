@@ -3,7 +3,7 @@ package filters
 import (
 	"strings"
 
-	"bitwormhole.com/starter/cli"
+	"github.com/starter-go/cli"
 )
 
 // MultilineCommandFilter ...

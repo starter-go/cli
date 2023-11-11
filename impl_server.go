@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"bitwormhole.com/starter/vlog"
+	"github.com/starter-go/vlog"
 )
 
 ////////////////////////////////////////////////////////////////////////////////

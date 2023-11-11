@@ -3,8 +3,8 @@ package filters
 import (
 	"strings"
 
-	"bitwormhole.com/starter/cli"
-	"bitwormhole.com/starter/cli/arguments"
+	"github.com/starter-go/application/arguments"
+	"github.com/starter-go/cli"
 )
 
 // CommandPrepareFilter ...
@@ -28,7 +28,7 @@ func (inst *CommandPrepareFilter) GetFilters() []*cli.FilterRegistration {
 // Pass ...
 func (inst *CommandPrepareFilter) Pass(task *cli.Task, chain cli.FilterChain) error {
 
-	a1 := arguments.Parse(task.Command)
+	a1, _ := arguments.Parse(task.Command)
 	a2 := task.Arguments
 
 	// 混合在一起

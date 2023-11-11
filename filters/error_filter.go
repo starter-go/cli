@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"bitwormhole.com/starter/cli"
+	"github.com/starter-go/cli"
 )
 
 type errorFilterHolder struct {

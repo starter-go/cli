@@ -3,29 +3,30 @@ package lib
 import (
 	"context"
 
-	"bitwormhole.com/starter/cli"
-	"bitwormhole.com/starter/cli/config"
-	"github.com/bitwormhole/starter/application"
-	"github.com/bitwormhole/starter/markup"
+	"github.com/starter-go/application"
+	"github.com/starter-go/cli"
+	"github.com/starter-go/cli/config"
 )
 
 // ComCLI ... 实现一个自动配置的 CLI
 type ComCLI struct {
-	markup.Component `id:"cli" class:"life"`
+	//// markup.Component `id:"cli" class:"life"`
+	//starter:component
+	_as func(cli.CLI, application.Lifecycle) //starter:as("#",".")
 
-	Handlers []cli.HandlerRegistry `inject:".cli-handler-registry"`
-	Filters  []cli.FilterRegistry  `inject:".cli-filter-registry"`
+	Handlers []cli.HandlerRegistry //starter:inject(".")
+	Filters  []cli.FilterRegistry  //starter:inject(".")
 
 	impl cli.CLI
 }
 
-func (inst *ComCLI) _Impl() (cli.CLI, application.LifeRegistry) {
+func (inst *ComCLI) _Impl() (cli.CLI, application.Lifecycle) {
 	return inst, inst
 }
 
-// GetLifeRegistration ...
-func (inst *ComCLI) GetLifeRegistration() *application.LifeRegistration {
-	return &application.LifeRegistration{
+// Life ...
+func (inst *ComCLI) Life() *application.Life {
+	return &application.Life{
 		OnStart: inst.start,
 	}
 }

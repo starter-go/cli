@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 
-	"bitwormhole.com/starter/cli"
+	"github.com/starter-go/cli"
 )
 
 // SleepHandler ...

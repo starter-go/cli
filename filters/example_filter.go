@@ -1,7 +1,7 @@
 package filters
 
 import (
-	"bitwormhole.com/starter/cli"
+	"github.com/starter-go/cli"
 )
 
 // ExampleFilter ...

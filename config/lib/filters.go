@@ -1,14 +1,17 @@
 package lib
 
 import (
-	"bitwormhole.com/starter/cli"
-	"bitwormhole.com/starter/cli/filters"
-	"github.com/bitwormhole/starter/markup"
+	"github.com/starter-go/cli"
+	"github.com/starter-go/cli/filters"
 )
 
 // Filters ...
 type Filters struct {
-	markup.Component `class:"cli-filter-registry"`
+
+	//// markup.Component `class:"cli-filter-registry"`
+	//starter:component
+	_as func(cli.FilterRegistry) //starter:as(".")
+
 }
 
 func (inst *Filters) _Impl() cli.FilterRegistry {

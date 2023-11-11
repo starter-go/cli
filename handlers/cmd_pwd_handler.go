@@ -1,6 +1,6 @@
 package handlers
 
-import "bitwormhole.com/starter/cli"
+import "github.com/starter-go/cli"
 
 // PwdHandler ...
 type PwdHandler struct {

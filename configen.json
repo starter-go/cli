@@ -1,0 +1,45 @@
+{
+    "configen": {
+        "version": "4",
+        "sources": [
+            {
+                "id": "lib",
+                "path": "config/lib",
+                "r": true
+            },
+            {
+                "id": "common",
+                "path": "config/common",
+                "r": true
+            },
+            {
+                "id": "example",
+                "path": "config/example",
+                "r": true
+            } 
+        ],
+        "destinations": [
+            {
+                "id": "lib",
+                "path": "gen/gen4lib",
+                "sources": [
+                    "lib"
+                ]
+            },
+            {
+                "id": "common",
+                "path": "gen/gen4common",
+                "sources": [
+                    "common"
+                ]
+            },
+            {
+                "id": "example",
+                "path": "gen/gen4example",
+                "sources": [
+                    "example"
+                ]
+            }
+        ]
+    }
+}

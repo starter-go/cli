@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"bitwormhole.com/starter/cli"
-	"bitwormhole.com/starter/cli/config"
+	"github.com/starter-go/cli"
+	"github.com/starter-go/cli/config"
 )
 
 func testCommand(t *testing.T, cmd string) {

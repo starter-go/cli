@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"bitwormhole.com/starter/cli/arguments"
+	"github.com/starter-go/cli/arguments"
 )
 
 func TestArguments(t *testing.T) {

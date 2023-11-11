@@ -1,25 +1,26 @@
 package example
 
 import (
-	"bitwormhole.com/starter/cli"
-	"github.com/bitwormhole/starter/application"
-	"github.com/bitwormhole/starter/markup"
+	"github.com/starter-go/application"
+	"github.com/starter-go/cli"
 )
 
 // TestPoint ...
 type TestPoint struct {
-	markup.Component `class:"life"`
 
-	CLI cli.CLI `inject:"#cli"`
+	//starter:component
+	_as func(application.Lifecycle) //starter:as(".")
+
+	CLI cli.CLI //starter:inject("#")
 }
 
-func (inst *TestPoint) _Impl() application.LifeRegistry {
+func (inst *TestPoint) _Impl() application.Lifecycle {
 	return inst
 }
 
-// GetLifeRegistration ...
-func (inst *TestPoint) GetLifeRegistration() *application.LifeRegistration {
-	return &application.LifeRegistration{
+// Life ...
+func (inst *TestPoint) Life() *application.Life {
+	return &application.Life{
 		OnStart: inst.start,
 	}
 }

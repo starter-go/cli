@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"bitwormhole.com/starter/afs"
-	"bitwormhole.com/starter/afs/files"
-	"bitwormhole.com/starter/cli"
+	"github.com/starter-go/afs"
+	"github.com/starter-go/afs/files"
+	"github.com/starter-go/cli"
 )
 
 // LsHandler ...

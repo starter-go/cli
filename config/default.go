@@ -1,9 +1,9 @@
 package config
 
 import (
-	"bitwormhole.com/starter/cli"
-	"bitwormhole.com/starter/cli/filters"
-	"bitwormhole.com/starter/cli/handlers"
+	"github.com/starter-go/cli"
+	"github.com/starter-go/cli/filters"
+	"github.com/starter-go/cli/handlers"
 )
 
 // GetDefaultConfiguration 取默认配置

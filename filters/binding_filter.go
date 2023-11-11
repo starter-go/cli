@@ -4,8 +4,8 @@ import (
 	"context"
 	"os"
 
-	"bitwormhole.com/starter/cli"
-	"bitwormhole.com/starter/vlog"
+	"github.com/starter-go/cli"
+	"github.com/starter-go/vlog"
 )
 
 // BindingFilter ...
@@ -46,7 +46,7 @@ func (inst *BindingFilter) Pass(task *cli.Task, chain cli.FilterChain) error {
 	defer func() {
 		err = inst.postProcess(task, b)
 		if err != nil {
-			vlog.Warn(err)
+			vlog.Warn(err.Error())
 		}
 	}()
 

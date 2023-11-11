@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"bitwormhole.com/starter/cli"
-	"github.com/bitwormhole/starter/util"
+	"github.com/starter-go/base/lang"
+	"github.com/starter-go/cli"
 )
 
 // NowHandler ...
@@ -46,10 +46,11 @@ func (inst *NowHandler) GetHelp() *cli.HelpInfo {
 
 // Run ...
 func (inst *NowHandler) Run(task *cli.Task) error {
-	now := time.Now()
-	t := util.NewTime(now).Int64()
+	now := lang.Now()
+	t := now.Int() // util.NewTime(now).Int64()
+
 	builder := strings.Builder{}
-	builder.WriteString(now.Format(time.RFC3339))
+	builder.WriteString(now.Time().Format(time.RFC3339))
 	builder.WriteString(" (t=")
 	builder.WriteString(strconv.FormatInt(t, 10))
 	builder.WriteString(")\n")

@@ -1,12 +1,14 @@
 package main
 
 import (
-	"bitwormhole.com/starter/cli/libcli"
-	"github.com/bitwormhole/starter"
+	"os"
+
+	"github.com/starter-go/cli/modules/cli"
+	"github.com/starter-go/starter"
 )
 
 func main() {
-	i := starter.InitApp()
-	i.UseMain(libcli.ModuleExample())
+	i := starter.Init(os.Args)
+	i.MainModule(cli.ModuleExample())
 	i.Run()
 }
