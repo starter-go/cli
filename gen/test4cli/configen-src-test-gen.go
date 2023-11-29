@@ -5,19 +5,19 @@ import (
      "github.com/starter-go/application"
 )
 
-// type p4d9a94685.TestPoint in package:github.com/starter-go/cli/implements/test
+// type p4d9a94685.TPoint1 in package:github.com/starter-go/cli/implements/test
 //
-// id:com-4d9a94685042a0d8-test-TestPoint
+// id:com-4d9a94685042a0d8-test-TPoint1
 // class:
 // alias:
 // scope:singleton
 //
-type p4d9a946850_test_TestPoint struct {
+type p4d9a946850_test_TPoint1 struct {
 }
 
-func (inst* p4d9a946850_test_TestPoint) register(cr application.ComponentRegistry) error {
+func (inst* p4d9a946850_test_TPoint1) register(cr application.ComponentRegistry) error {
 	r := cr.NewRegistration()
-	r.ID = "com-4d9a94685042a0d8-test-TestPoint"
+	r.ID = "com-4d9a94685042a0d8-test-TPoint1"
 	r.Classes = ""
 	r.Aliases = ""
 	r.Scope = "singleton"
@@ -26,13 +26,13 @@ func (inst* p4d9a946850_test_TestPoint) register(cr application.ComponentRegistr
 	return r.Commit()
 }
 
-func (inst* p4d9a946850_test_TestPoint) new() any {
-    return &p4d9a94685.TestPoint{}
+func (inst* p4d9a946850_test_TPoint1) new() any {
+    return &p4d9a94685.TPoint1{}
 }
 
-func (inst* p4d9a946850_test_TestPoint) inject(injext application.InjectionExt, instance any) error {
+func (inst* p4d9a946850_test_TPoint1) inject(injext application.InjectionExt, instance any) error {
 	ie := injext
-	com := instance.(*p4d9a94685.TestPoint)
+	com := instance.(*p4d9a94685.TPoint1)
 	nop(ie, com)
 
 	
@@ -43,7 +43,7 @@ func (inst* p4d9a946850_test_TestPoint) inject(injext application.InjectionExt, 
 }
 
 
-func (inst*p4d9a946850_test_TestPoint) getCLI(ie application.InjectionExt)p1336d65ed.CLI{
+func (inst*p4d9a946850_test_TPoint1) getCLI(ie application.InjectionExt)p1336d65ed.CLI{
     return ie.GetComponent("#alias-1336d65edeed550b78a5d5b61e92d726-CLI").(p1336d65ed.CLI)
 }
 

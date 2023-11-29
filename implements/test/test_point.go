@@ -5,20 +5,20 @@ import (
 	"github.com/starter-go/units"
 )
 
-// TestPoint ...
-type TestPoint struct {
+// TPoint1 ... 测试点：No.1
+type TPoint1 struct {
 
 	//starter:component
 
 	CLI cli.CLI //starter:inject("#")
 }
 
-func (inst *TestPoint) _Impl() units.Units {
+func (inst *TPoint1) _Impl() units.Units {
 	return inst
 }
 
 // Units ...
-func (inst *TestPoint) Units(list []*units.Registration) []*units.Registration {
+func (inst *TPoint1) Units(list []*units.Registration) []*units.Registration {
 
 	r1 := &units.Registration{
 		Name:     "test-point-1",
@@ -31,7 +31,7 @@ func (inst *TestPoint) Units(list []*units.Registration) []*units.Registration {
 	return list
 }
 
-func (inst *TestPoint) run() error {
+func (inst *TPoint1) run() error {
 	c := inst.CLI
 	// client := c.GetClient()
 	ctx := c.Bind(nil)
