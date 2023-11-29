@@ -3,33 +3,36 @@ package cli
 import (
 	"github.com/starter-go/application"
 	"github.com/starter-go/cli"
-	"github.com/starter-go/cli/gen/gen4common"
-	"github.com/starter-go/cli/gen/gen4example"
-	"github.com/starter-go/cli/gen/gen4lib"
+
+	"github.com/starter-go/cli/gen/core4cli"
+	"github.com/starter-go/cli/gen/extention4cli"
+	"github.com/starter-go/cli/gen/test4cli"
 )
 
 // Module 导出模块：[github.com/starter-go/cli]
 func Module() application.Module {
-	mb := cli.CreateModule(nil)
-	mb.Components(gen4lib.ComForCLI)
+	mb := cli.CreateCoreModule(nil)
+	mb.Components(core4cli.Components)
 	return mb.Create()
 }
 
-// ModuleCommon 导出模块：[github.com/starter-go/cli#common]
-func ModuleCommon() application.Module {
+// ModuleExtention 导出模块：[github.com/starter-go/cli#extention]
+func ModuleExtention() application.Module {
 	parent := Module()
-	mb := cli.CreateModule(nil).Name(parent.Name() + "#common")
-	mb.Components(gen4common.ComForCLICommon)
+
+	mb := cli.CreateExtentionModule(nil)
+	mb.Components(extention4cli.Components)
 	mb.Depend(parent)
 	return mb.Create()
 }
 
-// ModuleExample 导出模块：[github.com/starter-go/cli#example]
-func ModuleExample() application.Module {
+// ModuleTest 导出模块：[github.com/starter-go/cli#test]
+func ModuleTest() application.Module {
 	parent1 := Module()
-	parent2 := ModuleCommon()
-	mb := cli.CreateModule(nil).Name(parent1.Name() + "#example")
-	mb.Components(gen4example.ComForCLIExample)
+	parent2 := ModuleExtention()
+
+	mb := cli.CreateTestModule(nil)
+	mb.Components(test4cli.Components)
 	mb.Depend(parent1, parent2)
 	return mb.Create()
 }

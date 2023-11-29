@@ -3,41 +3,41 @@
         "version": "4",
         "sources": [
             {
-                "id": "lib",
-                "path": "config/lib",
+                "id": "core",
+                "path": "implements/core",
                 "r": true
             },
             {
-                "id": "common",
-                "path": "config/common",
+                "id": "extention",
+                "path": "implements/extention",
                 "r": true
             },
             {
-                "id": "example",
-                "path": "config/example",
+                "id": "test",
+                "path": "implements/test",
                 "r": true
             } 
         ],
         "destinations": [
             {
-                "id": "lib",
-                "path": "gen/gen4lib",
+                "id": "core",
+                "path": "gen/core4cli",
                 "sources": [
-                    "lib"
+                    "core"
                 ]
             },
             {
-                "id": "common",
-                "path": "gen/gen4common",
+                "id": "extention",
+                "path": "gen/extention4cli",
                 "sources": [
-                    "common"
+                    "extention"
                 ]
             },
             {
-                "id": "example",
-                "path": "gen/gen4example",
+                "id": "test",
+                "path": "gen/test4cli",
                 "sources": [
-                    "example"
+                    "test"
                 ]
             }
         ]

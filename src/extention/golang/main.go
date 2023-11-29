@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-	m := cli.ModuleTest()
+	m := cli.ModuleExtention()
 
 	r := units.NewRunner()
 	r.Dependencies(m)

@@ -5,11 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "test_main",
+            "name": "test",
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceFolder}/src/test/golang"
+            "program": "${workspaceFolder}/src/test/golang",
+            "dlvFlags": [
+                "--check-go-version=false"
+            ],
+            "args": [
+                "--debug.enabled=0",
+                "--test.units.run-all=1",
+            ]
         }
     ]
 }
