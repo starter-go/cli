@@ -21,19 +21,46 @@ func (inst *TPoint1) _Impl() units.Units {
 func (inst *TPoint1) Units(list []*units.Registration) []*units.Registration {
 
 	r1 := &units.Registration{
-		Name:     "test-point-1",
+		Name:     "test-point-1-1",
 		Enabled:  true,
 		Priority: 0,
-		Test:     inst.run,
+		Test:     inst.run1,
+	}
+
+	r2 := &units.Registration{
+		Name:     "test-point-1-2",
+		Enabled:  true,
+		Priority: 0,
+		Test:     inst.run2,
+	}
+
+	r3 := &units.Registration{
+		Name:     "test-point-1-3",
+		Enabled:  true,
+		Priority: 100,
+		Test:     inst.run3,
 	}
 
 	list = append(list, r1)
+	list = append(list, r2)
+	list = append(list, r3)
 	return list
 }
 
-func (inst *TPoint1) run() error {
+func (inst *TPoint1) runCommand(cmd string) error {
 	c := inst.CLI
-	// client := c.GetClient()
 	ctx := c.Bind(nil)
-	return c.GetClient().RunCCA(ctx, "pwd", nil)
+	return c.GetClient().RunCCA(ctx, cmd, nil)
+}
+
+func (inst *TPoint1) run1() error {
+	return inst.runCommand("pwd")
+}
+
+func (inst *TPoint1) run2() error {
+	return inst.runCommand("now")
+}
+
+func (inst *TPoint1) run3() error {
+	return inst.runCommand("help")
 }

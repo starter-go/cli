@@ -4,6 +4,10 @@ import "github.com/starter-go/cli"
 
 // ExampleHandler ...
 type ExampleHandler struct {
+
+	//starter:component
+	_as func(cli.HandlerRegistry) //starter:as(".")
+
 }
 
 func (inst *ExampleHandler) _Impl() (cli.Handler, cli.HandlerRegistry, cli.Help) {

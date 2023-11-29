@@ -11,6 +11,10 @@ import (
 
 // ChdirHandler ...
 type ChdirHandler struct {
+
+	//starter:component
+	_as func(cli.HandlerRegistry) //starter:as(".")
+
 }
 
 func (inst *ChdirHandler) _Impl() (cli.Handler, cli.HandlerRegistry, cli.Help) {

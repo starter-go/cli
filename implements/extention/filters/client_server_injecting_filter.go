@@ -6,7 +6,11 @@ import (
 
 // ClientServerInjectingFilter ...
 type ClientServerInjectingFilter struct {
-	Context *cli.Context
+
+	//starter:component
+	_as func(cli.FilterRegistry) //starter:as(".")
+
+	// 	Context *cli.Context
 }
 
 func (inst *ClientServerInjectingFilter) _Impl() (cli.FilterRegistry, cli.Filter) {
@@ -14,7 +18,7 @@ func (inst *ClientServerInjectingFilter) _Impl() (cli.FilterRegistry, cli.Filter
 }
 
 func (inst *ClientServerInjectingFilter) init(c *cli.Context) error {
-	inst.Context = c
+	//  inst.Context = c
 	return nil
 }
 
@@ -32,9 +36,9 @@ func (inst *ClientServerInjectingFilter) GetFilters() []*cli.FilterRegistration 
 // Pass ...
 func (inst *ClientServerInjectingFilter) Pass(task *cli.Task, chain cli.FilterChain) error {
 
-	ctx := inst.Context
-	task.Client = ctx.Client
-	task.Server = ctx.Server
+	// ctx := inst.Context
+	// task.Client = ctx.Client
+	// task.Server = ctx.Server
 
 	return chain.Pass(task)
 }

@@ -8,6 +8,10 @@ import (
 
 // MultilineCommandFilter ...
 type MultilineCommandFilter struct {
+
+	//starter:component
+	_as func(cli.FilterRegistry) //starter:as(".")
+
 }
 
 func (inst *MultilineCommandFilter) _Impl() (cli.FilterRegistry, cli.Filter) {

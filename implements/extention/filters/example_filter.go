@@ -6,6 +6,10 @@ import (
 
 // ExampleFilter ...
 type ExampleFilter struct {
+
+	//starter:component
+	_as func(cli.FilterRegistry) //starter:as(".")
+
 }
 
 func (inst *ExampleFilter) _Impl() (cli.FilterRegistry, cli.Filter) {

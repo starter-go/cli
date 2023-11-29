@@ -31,8 +31,6 @@ func (inst*autoRegistrar) addAll() error {
 
     
     inst.register(&pb6de49a969_core_ComCLI{})
-    inst.register(&pb6de49a969_core_Filters{})
-    inst.register(&pb6de49a969_core_Handlers{})
 
 
     return nil

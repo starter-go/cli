@@ -11,6 +11,10 @@ import (
 
 // NowHandler ...
 type NowHandler struct {
+
+	//starter:component
+	_as func(cli.HandlerRegistry) //starter:as(".")
+
 }
 
 func (inst *NowHandler) _Impl() (cli.Handler, cli.HandlerRegistry, cli.Help) {

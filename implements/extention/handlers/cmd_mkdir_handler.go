@@ -10,6 +10,10 @@ import (
 
 // MkdirHandler ...
 type MkdirHandler struct {
+
+	//starter:component
+	_as func(cli.HandlerRegistry) //starter:as(".")
+
 }
 
 func (inst *MkdirHandler) _Impl() (cli.Handler, cli.HandlerRegistry, cli.Help) {

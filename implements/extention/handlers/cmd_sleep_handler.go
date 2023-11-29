@@ -9,6 +9,10 @@ import (
 
 // SleepHandler ...
 type SleepHandler struct {
+
+	//starter:component
+	_as func(cli.HandlerRegistry) //starter:as(".")
+
 }
 
 func (inst *SleepHandler) _Impl() (cli.Handler, cli.HandlerRegistry, cli.Help) {

@@ -10,6 +10,10 @@ import (
 
 // HelpHandler ...
 type HelpHandler struct {
+
+	//starter:component
+	_as func(cli.HandlerRegistry) //starter:as(".")
+
 }
 
 func (inst *HelpHandler) _Impl() (cli.Handler, cli.HandlerRegistry, cli.Help) {

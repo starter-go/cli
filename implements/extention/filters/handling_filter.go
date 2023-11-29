@@ -6,6 +6,10 @@ import (
 
 // HandlingFilter ...
 type HandlingFilter struct {
+
+	//starter:component
+	_as func(cli.FilterRegistry) //starter:as(".")
+
 }
 
 func (inst *HandlingFilter) _Impl() (cli.FilterRegistry, cli.Filter) {

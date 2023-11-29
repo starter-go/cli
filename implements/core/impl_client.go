@@ -27,6 +27,10 @@ func (inst *clientImpl) RunCCA(ctx context.Context, cmd string, args []string) e
 
 func (inst *clientImpl) Run(t *cli.Task) error {
 	chain := inst.context.Chain
+
+	t.Client = inst.context.Client
+	t.Server = inst.context.Server
+
 	return chain.Pass(t)
 }
 

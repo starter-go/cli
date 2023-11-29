@@ -4,6 +4,10 @@ import "github.com/starter-go/cli"
 
 // PwdHandler ...
 type PwdHandler struct {
+
+	//starter:component
+	_as func(cli.HandlerRegistry) //starter:as(".")
+
 }
 
 func (inst *PwdHandler) _Impl() (cli.Handler, cli.HandlerRegistry, cli.Help) {

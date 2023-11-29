@@ -10,6 +10,10 @@ import (
 
 // BindingFilter ...
 type BindingFilter struct {
+
+	//starter:component
+	_as func(cli.FilterRegistry) //starter:as(".")
+
 }
 
 func (inst *BindingFilter) _Impl() (cli.FilterRegistry, cli.Filter) {

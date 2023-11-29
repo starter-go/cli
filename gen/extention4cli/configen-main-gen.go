@@ -30,7 +30,22 @@ func (inst *autoRegistrar) register(factory comFactory) error {
 func (inst*autoRegistrar) addAll() error {
 
     
+    inst.register(&p1eae9dc6c0_handlers_ChdirHandler{})
+    inst.register(&p1eae9dc6c0_handlers_ExampleHandler{})
+    inst.register(&p1eae9dc6c0_handlers_HelpHandler{})
+    inst.register(&p1eae9dc6c0_handlers_LsHandler{})
+    inst.register(&p1eae9dc6c0_handlers_MkdirHandler{})
+    inst.register(&p1eae9dc6c0_handlers_NowHandler{})
+    inst.register(&p1eae9dc6c0_handlers_PwdHandler{})
+    inst.register(&p1eae9dc6c0_handlers_SleepHandler{})
     inst.register(&paa85bf66ed_extention_Demo{})
+    inst.register(&pce9319ab50_filters_BindingFilter{})
+    inst.register(&pce9319ab50_filters_ClientServerInjectingFilter{})
+    inst.register(&pce9319ab50_filters_CommandPrepareFilter{})
+    inst.register(&pce9319ab50_filters_ErrorFilter{})
+    inst.register(&pce9319ab50_filters_ExampleFilter{})
+    inst.register(&pce9319ab50_filters_HandlingFilter{})
+    inst.register(&pce9319ab50_filters_MultilineCommandFilter{})
 
 
     return nil

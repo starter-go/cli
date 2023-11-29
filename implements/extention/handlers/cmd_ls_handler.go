@@ -14,6 +14,10 @@ import (
 
 // LsHandler ...
 type LsHandler struct {
+
+	//starter:component
+	_as func(cli.HandlerRegistry) //starter:as(".")
+
 }
 
 func (inst *LsHandler) _Impl() (cli.Handler, cli.HandlerRegistry, cli.Help) {

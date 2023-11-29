@@ -9,6 +9,10 @@ import (
 
 // CommandPrepareFilter ...
 type CommandPrepareFilter struct {
+
+	//starter:component
+	_as func(cli.FilterRegistry) //starter:as(".")
+
 }
 
 func (inst *CommandPrepareFilter) _Impl() (cli.FilterRegistry, cli.Filter) {

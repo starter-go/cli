@@ -15,6 +15,10 @@ type errorFilterHolder struct {
 
 // ErrorFilter ...
 type ErrorFilter struct {
+
+	//starter:component
+	_as func(cli.FilterRegistry) //starter:as(".")
+
 }
 
 func (inst *ErrorFilter) _Impl() (cli.FilterRegistry, cli.Filter) {
