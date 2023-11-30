@@ -1,48 +1,9 @@
 package extention4cli
 import (
-    paa85bf66e "github.com/starter-go/cli/implements/extention"
     pce9319ab5 "github.com/starter-go/cli/implements/extention/filters"
     p1eae9dc6c "github.com/starter-go/cli/implements/extention/handlers"
      "github.com/starter-go/application"
 )
-
-// type paa85bf66e.Demo in package:github.com/starter-go/cli/implements/extention
-//
-// id:com-aa85bf66edb60b91-extention-Demo
-// class:
-// alias:
-// scope:singleton
-//
-type paa85bf66ed_extention_Demo struct {
-}
-
-func (inst* paa85bf66ed_extention_Demo) register(cr application.ComponentRegistry) error {
-	r := cr.NewRegistration()
-	r.ID = "com-aa85bf66edb60b91-extention-Demo"
-	r.Classes = ""
-	r.Aliases = ""
-	r.Scope = "singleton"
-	r.NewFunc = inst.new
-	r.InjectFunc = inst.inject
-	return r.Commit()
-}
-
-func (inst* paa85bf66ed_extention_Demo) new() any {
-    return &paa85bf66e.Demo{}
-}
-
-func (inst* paa85bf66ed_extention_Demo) inject(injext application.InjectionExt, instance any) error {
-	ie := injext
-	com := instance.(*paa85bf66e.Demo)
-	nop(ie, com)
-
-	
-
-
-    return nil
-}
-
-
 
 // type pce9319ab5.BindingFilter in package:github.com/starter-go/cli/implements/extention/filters
 //
@@ -566,6 +527,44 @@ func (inst* p1eae9dc6c0_handlers_PwdHandler) new() any {
 func (inst* p1eae9dc6c0_handlers_PwdHandler) inject(injext application.InjectionExt, instance any) error {
 	ie := injext
 	com := instance.(*p1eae9dc6c.PwdHandler)
+	nop(ie, com)
+
+	
+
+
+    return nil
+}
+
+
+
+// type p1eae9dc6c.RunHandler in package:github.com/starter-go/cli/implements/extention/handlers
+//
+// id:com-1eae9dc6c0c30769-handlers-RunHandler
+// class:class-1336d65edeed550b78a5d5b61e92d726-HandlerRegistry
+// alias:
+// scope:singleton
+//
+type p1eae9dc6c0_handlers_RunHandler struct {
+}
+
+func (inst* p1eae9dc6c0_handlers_RunHandler) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-1eae9dc6c0c30769-handlers-RunHandler"
+	r.Classes = "class-1336d65edeed550b78a5d5b61e92d726-HandlerRegistry"
+	r.Aliases = ""
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* p1eae9dc6c0_handlers_RunHandler) new() any {
+    return &p1eae9dc6c.RunHandler{}
+}
+
+func (inst* p1eae9dc6c0_handlers_RunHandler) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*p1eae9dc6c.RunHandler)
 	nop(ie, com)
 
 	

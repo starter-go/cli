@@ -41,9 +41,18 @@ func (inst *TPoint1) Units(list []*units.Registration) []*units.Registration {
 		Test:     inst.run3,
 	}
 
+	r4 := &units.Registration{
+		Name:     "test-point-1-4",
+		Enabled:  true,
+		Priority: 0,
+		Test:     inst.run4,
+	}
+
 	list = append(list, r1)
 	list = append(list, r2)
 	list = append(list, r3)
+	list = append(list, r4)
+
 	return list
 }
 
@@ -63,4 +72,9 @@ func (inst *TPoint1) run2() error {
 
 func (inst *TPoint1) run3() error {
 	return inst.runCommand("help")
+}
+
+func (inst *TPoint1) run4() error {
+	// return inst.runCommand("run git status  ")
+	return inst.runCommand("run 'C:\\Program Files\\Mozilla Firefox\\firefox.exe'  https://www.cctv.com/ ")
 }
