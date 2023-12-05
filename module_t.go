@@ -9,9 +9,13 @@ import (
 
 const (
 	theModuleName     = "github.com/starter-go/cli"
-	theModuleVersion  = "v1.0.4"
-	theModuleRevision = 14
+	theModuleVersion  = "v1.0.5"
+	theModuleRevision = 15
+)
 
+////////////////////////////////////////////////////////////////////////////////
+
+const (
 	theCoreModuleResPath      = "src/core/resources"
 	theTestModuleResPath      = "src/test/resources"
 	theExtentionModuleResPath = "src/extention/resources"
@@ -25,6 +29,8 @@ var theTestModuleResFS embed.FS
 
 //go:embed "src/extention/resources"
 var theExtentionModuleResFS embed.FS
+
+////////////////////////////////////////////////////////////////////////////////
 
 // CreateCoreModule 初始化一个 ModuleBuilder
 func CreateCoreModule(mb *application.ModuleBuilder) *application.ModuleBuilder {
