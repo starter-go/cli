@@ -57,8 +57,6 @@ func (inst *MkdirHandler) Run(task *cli.Task) error {
 		return errors.New("the file/dir is exists, path=" + child.GetPath())
 	}
 
-	opt := &afs.Options{
-		Create: true,
-	}
+	opt := afs.ToMakeDir()
 	return child.Mkdir(opt)
 }
